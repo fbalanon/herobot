@@ -10,7 +10,20 @@ module.exports = function(hero) {
     hero.respond(/padawan/, function(res) {
         return res.send("What is thy bidding my master?");
     });
-//My cheat sheet to recall some basics not used often
+//Code to receive some random motivation, reset or take a break, or to feel accomplished
+    hero.respond(/I'm (.*)/, function(res) {
+        var mood = res.match[1]
+        if (mood === "tired") {
+          return res.send("listen to some music for motivation! \n" + randomMotivate);
+        } else if (mood === "going crazy"){
+          return res.send("take a break \n" + randomReset);
+        } else if (mood === "done"){
+          return res.send("Congratulations \n" + "https://youtu.be/pIOOwhmkoLo");
+        } else {
+          return res.send("Sorry, I can't help you, phone a friend!");
+        }
+    });
+//My cheat sheet to recall some basics
     hero.respond(/what (.*)/, function(msg){
       var term;
       term = msg.match[1];
@@ -49,18 +62,5 @@ module.exports = function(hero) {
         default:
           return msg.reply("I don't know what " + term + " is. I believe I require an update!");
       }
-    });
-//Code to receive some random motivation, reset or take a break, or to feel accomplished
-    hero.respond(/I'm (.*)/, function(res) {
-        var mood = res.match[1]
-        if (mood === "tired") {
-          return res.send("listen to some music for motivation! \n" + randomMotivate);
-        } else if (mood === "going crazy"){
-          return res.send("take a break \n" + randomReset);
-        } else if (mood === "done"){
-          return res.send("Congratulations \n" + "https://youtu.be/pIOOwhmkoLo");
-        } else {
-          return res.send("Sorry, I can't help you, phone a friend!");
-        }
     });
 };
